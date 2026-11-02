@@ -39,22 +39,3 @@ $('start').addEventListener('click',start);$('overlayStart').addEventListener('c
 async function init(){await RAPIER.init();world=new RAPIER.World({x:0,y:-9.81,z:0});const floor=world.createRigidBody(RAPIER.RigidBodyDesc.fixed().setTranslation(0,-.5,0));world.createCollider(RAPIER.ColliderDesc.cuboid(60,.5,40).setFriction(1),floor);ballBody=world.createRigidBody(RAPIER.RigidBodyDesc.dynamic().setTranslation(0,.55,0).setLinearDamping(.38).setAngularDamping(.65));world.createCollider(RAPIER.ColliderDesc.ball(.43).setRestitution(.62).setFriction(.7),ballBody);ballMesh=new THREE.Mesh(new THREE.SphereGeometry(.43,24,18),new THREE.MeshStandardMaterial({color:0xf5f4e9,roughness:.42}));ballMesh.castShadow=true;scene.add(ballMesh)}
 function animate(now){requestAnimationFrame(animate);const dt=Math.min(.033,(now-last)/1000||.016);last=now;if(world){if(running){playerMove(dt);ai(dt);if(mouseDown)charge=Math.min(1,charge+dt*.7);world.timestep=dt;world.step();ballUpdate();elapsed+=dt;$('clock').textContent=String(Math.floor(elapsed/60)).padStart(2,'0')+':'+String(Math.floor(elapsed%60)).padStart(2,'0')}else world.step()}cameraUpdate(dt);renderer.render(scene,camera)}
 new ResizeObserver(resize).observe(root);resize();init().then(()=>requestAnimationFrame(animate)).catch(e=>{console.error(e);$('playerState').textContent='Não foi possível iniciar a física 3D.'});
-
-const pageNames={home:"INÍCIO",play:"JOGAR",clubs:"CLUBES",squad:"PLANTEL",tactics:"TÁCTICAS",career:"CARREIRA",achievements:"CONQUISTAS",match:"PARTIDA"};
-function showPage(name){document.querySelectorAll('.page').forEach(p=>p.classList.toggle('active',p.id==='page-'+name));document.querySelectorAll('.nav-item').forEach(b=>b.classList.toggle('active',b.dataset.page===name));$('pageCrumb').textContent=pageNames[name]||name.toUpperCase();window.scrollTo({top:0,behavior:'smooth'});if(name==='match')setTimeout(resize,80)}
-document.querySelectorAll('.nav-item').forEach(b=>b.addEventListener('click',()=>showPage(b.dataset.page)));
-document.querySelectorAll('[data-goto]').forEach(b=>b.addEventListener('click',()=>showPage(b.dataset.goto)));
-const badgeCodes={Benfica:'SLB','FC Porto':'FCP',Sporting:'SCP','SC Braga':'SCB','Vitória SC':'VSC',Boavista:'BFC','Rio Ave':'RAV'};
-function updateClubUI(){const h=$('homeTeam').value,a=$('awayTeam').value;$('homeLabel').textContent=h.toUpperCase();$('awayLabel').textContent=a.toUpperCase();$('homeBadge').textContent=badgeCodes[h]||h.slice(0,3).toUpperCase();$('awayBadge').textContent=badgeCodes[a]||a.slice(0,3).toUpperCase();$('homeBadge').style.background='#'+(kits[h]||0xd51c36).toString(16).padStart(6,'0');$('awayBadge').style.background='#'+(kits[a]||0x1769bd).toString(16).padStart(6,'0')}
-$('homeTeam').addEventListener('change',updateClubUI);$('awayTeam').addEventListener('change',updateClubUI);updateClubUI();
-document.querySelectorAll('[data-club]').forEach(b=>b.addEventListener('click',()=>{$('homeTeam').value=b.dataset.club;updateClubUI();showPage('play')}));
-document.querySelectorAll('[data-formation]').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('[data-formation]').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');$('formation').value=b.dataset.formation}));
-const originalStart=start;
-start=function(){originalStart();$('homeLabelMatch').textContent=$('homeTeam').value.toUpperCase();$('awayLabelMatch').textContent=$('awayTeam').value.toUpperCase();showPage('match')};
-$('backMenu').addEventListener('click',()=>{running=false;showPage('home');$('overlay').classList.remove('hidden')});
-const originalReset=reset;
-reset=function(){originalReset();showPage('home')};
-
-$('start').addEventListener('click',()=>{ $('homeLabelMatch').textContent=$('homeTeam').value.toUpperCase();$('awayLabelMatch').textContent=$('awayTeam').value.toUpperCase();showPage('match') });
-$('overlayStart').addEventListener('click',()=>showPage('match'));
-$('reset').addEventListener('click',()=>showPage('home'));
