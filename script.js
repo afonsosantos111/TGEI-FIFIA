@@ -54,3 +54,7 @@ start=function(){originalStart();$('homeLabelMatch').textContent=$('homeTeam').v
 $('backMenu').addEventListener('click',()=>{running=false;showPage('home');$('overlay').classList.remove('hidden')});
 const originalReset=reset;
 reset=function(){originalReset();showPage('home')};
+
+$('start').addEventListener('click',()=>{ $('homeLabelMatch').textContent=$('homeTeam').value.toUpperCase();$('awayLabelMatch').textContent=$('awayTeam').value.toUpperCase();showPage('match') });
+$('overlayStart').addEventListener('click',()=>showPage('match'));
+$('reset').addEventListener('click',()=>showPage('home'));
