@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Penáltis FC — Modo Carreira</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main class="app">
+  <header class="topbar">
+    <a class="brand" href="#"><span class="brand-ball">⚽</span><span><b>PENÁLTIS FC</b><small>FOOTBALL MATCH EXPERIENCE</small></span></a>
+    <div class="status"><i></i> ESTÁDIO AO VIVO <span id="roundTag">TREINO</span></div>
+  </header>
+
+  <section class="hero">
+    <div><p class="eyebrow">ENTRA EM CAMPO. FAZ HISTÓRIA.</p><h1>O jogo é teu.<br><em>Domina o relvado.</em></h1>
+    <p class="subtitle">Joga partidas completas em terceira pessoa: controla o teu jogador, passa, corre, remata e tenta vencer o adversário. Cada parte dura 2 minutos.</p></div>
+    <div class="hero-mark">⚽<small>90' + EMOÇÃO</small></div>
+  </section>
+
+  <nav class="mode-tabs" aria-label="Modo de jogo">
+    <button class="mode active" data-mode="training">🎯 Treino</button>
+    <button class="mode" data-mode="freekick">🌀 Livre direto</button>
+    <button class="mode" data-mode="match">🥅 Penáltis vs equipas</button>
+    <button class="mode" data-mode="fullmatch">🏟️ Jogo completo 11v11</button>
+    <button class="mode" data-mode="bet">💰 BET &amp; CONQUISTAS</button>
+  </nav>
+
+  <section class="setup" id="teamSetup">
+    <div class="setup-title"><span>ESCOLHE O TEU DESAFIO</span><small>ÉPOCA 2026/27 · EQUIPAS PORTUGUESAS</small></div>
+    <label>DIVISÃO
+      <select id="division">
+        <option value="1">1.ª Divisão — Liga Portugal</option>
+        <option value="2">2.ª Divisão — Liga Portugal 2</option>
+        <option value="3">3.ª Divisão — Liga 3</option>
+      </select>
+    </label>
+    <label>A TUA EQUIPA
+      <select id="homeTeam"></select>
+    </label>
+    <label>ADVERSÁRIO
+      <select id="team"></select>
+    </label>
+    <label>TÁTICA DA TUA EQUIPA
+      <select id="formation">
+        <option value="4-3-3" selected>4-3-3 — Equilibrada e ofensiva</option>
+        <option value="4-2-2-2">4-2-2-2 — Pressão e jogo interior</option>
+        <option value="4-4-2">4-4-2 — Equilibrada</option>
+        <option value="3-5-2">3-5-2 — Meio-campo reforçado</option>
+      </select>
+    </label>
+    <label>DIFICULDADE DO ADVERSÁRIO
+      <select id="difficulty">
+        <option value="easy">Fácil</option>
+        <option value="normal" selected>Normal</option>
+        <option value="hard">Difícil</option>
+      </select>
+    </label>
+
+    <button id="startMatch" class="start-match">JOGAR PARTIDA <span>→</span></button>
+  </section>
+
+  <section class="bet-panel" id="betPanel">
+    <div class="bet-head"><div><small>CASA DE APOSTAS VIRTUAL</small><h2>BET PENÁLTIS</h2><p>Usa apenas moedas do jogo. Escolhe duas equipas, aposta no resultado e ganha moedas para desbloquear conteúdo.</p></div><div class="wallet">💰 <strong id="walletBalance">1000</strong><small>MOEDAS</small></div></div>
+    <div class="bet-grid"><label>Equipa A<select id="betHome"></select></label><label>Equipa B<select id="betAway"></select></label><label>Mercado<select id="betMarket"><option value="home">Vitória da Equipa A</option><option value="draw">Empate</option><option value="away">Vitória da Equipa B</option></select></label><label>Valor da aposta<input id="betStake" type="number" min="10" step="10" value="100"></label><button id="placeBet" class="start-match">FAZER APOSTA</button></div>
+    <div class="bet-lower"><div><h3>🔓 Loja de desbloqueios</h3><div id="unlockShop" class="unlock-shop"></div></div><div><h3>🏆 Conquistas</h3><div id="achievementList" class="achievement-list"></div></div></div>
+    <div class="bet-log" id="betLog">Escolhe duas equipas e faz a tua primeira aposta.</div>
+  </section>
+
+  <section class="scorebar">
+    <div class="team-name"><span class="crest" id="myCrest">PF</span><div><small>O TEU CLUBE</small><b id="myTeam">PENÁLTIS FC</b></div></div>
+    <div class="score"><strong id="myScore">0</strong><span>:</span><strong id="oppScore">0</strong></div>
+    <div class="team-name opponent"><div><small id="oppCaption">TREINO</small><b id="oppName">GUARDA-REDES</b></div><span class="crest opp-crest" id="oppCrest">GK</span></div>
+  </section>
+
+  <section class="scorers-panel" id="scorersPanel"><strong>⚽ MARCADORES</strong><span id="scorersList">Ainda não houve golos.</span></section>
+
+  <section class="game-area">
+    <div class="game-frame">
+      <div class="game-hud"><span><i class="live"></i><b id="modeHud">MODO TREINO</b></span><span id="shotCounter">REMATE 1</span></div>
+      <div class="blackout" id="blackout"><div class="blackout-content"><span>TECHBALL PRESENTS</span><strong>PREPARA-TE PARA ENTRAR EM CAMPO</strong><small>O estádio está à tua espera...</small></div></div>
+      <canvas id="game" width="1100" height="650" aria-label="Penáltis FC. WASD para mover, E para passar, Q para roubar/fintar e botão esquerdo para rematar."></canvas>
+      <div class="crosshair" id="crosshair">＋</div>
+      <div class="game-message" id="message">Escolhe um modo para começar</div>
+      <div class="kick-hint" id="kickHint">RATO = APONTAR&nbsp;&nbsp; • &nbsp;&nbsp; CLIQUE = REMATAR</div>
+    </div>
+    <aside class="controls">
+      <div class="control-head"><small>PAINEL DO JOGADOR</small><h2 id="controlTitle">Prepara o remate</h2></div>
+      <div class="aim-readout"><span id="aimLabel">ALVO DO RATO</span><b id="aimReadout">Centro da baliza</b></div>
+      <label class="range-title" for="power">FORÇA DO REMATE <strong id="powerValue">75%</strong></label>
+      <input type="range" id="power" min="25" max="100" value="75">
+      <div class="range-scale"><span>COLOCADO</span><span>FORTE</span></div>
+      <div class="charge-meter" id="chargeMeter"><div class="charge-fill" id="chargeFill"></div></div><small class="charge-label">MANTÉM O CLIQUE ESQUERDO PARA CARREGAR A FORÇA</small><div class="quick-actions"><button id="shoot" class="shoot">⚽ REMATAR</button><button id="pass" class="reset" title="Passar a bola (E)">E ↗</button><button id="tackle" class="reset" title="Roubar a bola (Q)">Q 🛡</button><button id="reset" class="reset" title="Reiniciar">↻</button></div>
+      <div class="stats">
+        <div><small>GOLOS</small><b id="goals">0</b></div>
+        <div><small>DEFESAS</small><b id="saves">0</b></div>
+        <div><small>PRECISÃO</small><b id="accuracy">—</b></div>
+      </div>
+      <div class="help" id="helpPanel">
+        <b>COMO JOGAR</b>
+        <p><span>01</span> Move o rato na baliza para apontar a direção.</p>
+        <p><span>02</span> Clica no campo ou em REMATAR para chutar.</p>
+        <p><span>03</span> Em livres diretos, aponta acima da barreira e curva a bola com o rato.</p>
+      </div>
+    </aside>
+  </section>
+
+  <section class="league-panel" id="leaguePanel">
+    <div class="league-heading"><div><small>ÉPOCA 2026/27</small><h2>Classificações</h2></div><label>DIVISÃO <select id="standingsDivision"><option value="1">1.ª Divisão</option><option value="2">2.ª Divisão</option><option value="3">3.ª Divisão</option></select></label></div>
+    <p class="league-note">Atualizada com os resultados das partidas jogadas neste jogo. Pontuação: vitória 3, empate 1, derrota 0.</p>
+    <div class="table-wrap"><table class="standings-table"><thead><tr><th>#</th><th>Clube</th><th>J</th><th>V</th><th>E</th><th>D</th><th>GM</th><th>GS</th><th>DG</th><th>Pts</th></tr></thead><tbody id="standingsBody"></tbody></table></div>
+  </section>
+  <footer>Penáltis FC · Jogo de futebol jogável em HTML, CSS e JavaScript · Controlos: WASD mover, E passar, Q roubar, botão esquerdo rematar</footer>
+</main>
+<script src="script.js"></script>
+</body>
+</html>

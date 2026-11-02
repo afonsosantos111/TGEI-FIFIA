@@ -1,0 +1,21 @@
+PENÁLTIS FC — CORREÇÃO DE IMAGEM E CONTROLOS
+
+Versão baseada em penaltis_fc_bet_kits_marcadores_conquistas.zip.
+
+Correções incluídas:
+- Canvas com resolução interna coerente com a proporção do campo para evitar redimensionamento desigual.
+- Mantém o desenho da baliza, guarda-redes, bola e barreira no Treino, Livre Direto e Penáltis vs Equipas.
+- Controlos apresentados de forma consistente em todos os modos:
+  WASD: mover/ajustar a posição nos modos de remate.
+  E: passe curto.
+  Q: finta/desloca o guarda-redes nos modos de remate; desarme no jogo completo.
+  Botão esquerdo do rato (BTN1): rematar.
+  Rato: apontar a direção; nos livres diretos também define a curva.
+  Jogo completo: WASD mover, Shift correr, botão esquerdo rematar, E passe, Q desarme.
+
+Como abrir no Mac:
+1. Extrai o ZIP.
+2. Abre a pasta penaltis_fc_first_person.
+3. Abre index.html no Safari ou Chrome.
+
+Nota de validação: o JavaScript foi verificado com node --check e o ZIP foi validado. Não foi possível fazer um teste visual interativo no Safari nesta sessão.
