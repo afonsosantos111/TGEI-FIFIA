@@ -2,30 +2,70 @@
 <html lang="pt-PT">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#07111c">
-<title>TGEI FIFIA | Football Experience</title>
+<meta name="theme-color" content="#080b12">
+<title>TGEI FIFIA | Beyond The Game</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800;900&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js","@dimforge/rapier3d-compat":"https://cdn.jsdelivr.net/npm/@dimforge/rapier3d-compat@0.14.0/rapier.es.js"}}</script>
 </head>
 <body>
-<div class="app">
-<header class="topbar"><a class="brand"><span class="brand-icon">TF</span><span><b>TGEI <em>FIFIA</em></b><small>THE NEXT GENERATION FOOTBALL</small></span></a><div class="live-pill"><i></i> MATCH ENGINE ONLINE</div></header>
-<section class="hero"><div><p class="eyebrow">A TUA HISTÓRIA. O TEU ESTÁDIO.</p><h1>FOOTBALL<br><em>REIMAGINED.</em></h1><p>Entra em campo, controla a equipa e escreve o resultado.</p></div><div class="hero-orb">⚽<small>3D MATCH ENGINE</small></div></section>
-<section class="setup panel">
-<div class="section-title"><span>CONFIGURAR PARTIDA</span><small>ESCOLHE O TEU DESAFIO</small></div>
-<label>O TEU CLUBE<select id="homeTeam"><option>Benfica</option><option>FC Porto</option><option>Sporting</option><option>SC Braga</option><option>Vitória SC</option><option>Boavista</option><option>Rio Ave</option></select></label>
-<label>ADVERSÁRIO<select id="awayTeam"><option>FC Porto</option><option>Benfica</option><option>Sporting</option><option>SC Braga</option><option>Vitória SC</option><option>Boavista</option><option>Rio Ave</option></select></label>
-<label>TÁTICA<select id="formation"><option>4-3-3</option><option>4-4-2</option><option>4-2-2-2</option><option>3-5-2</option></select></label>
-<label>DIFICULDADE<select id="difficulty"><option value="0.8">Amador</option><option value="1" selected>Profissional</option><option value="1.25">Lendário</option></select></label>
-<button id="start" class="primary">COMEÇAR PARTIDA <span>↗</span></button>
+<div class="shell">
+<aside class="sidebar">
+  <a class="logo" href="#"><span class="logo-mark">T</span><span>TGEI <b>FIFIA</b><small>BEYOND THE GAME</small></span></a>
+  <div class="nav-label">MENU PRINCIPAL</div>
+  <button class="nav-item active" data-page="home"><span>◈</span> Início <i></i></button>
+  <button class="nav-item" data-page="play"><span>⚽</span> Jogar</button>
+  <button class="nav-item" data-page="clubs"><span>♜</span> Clubes</button>
+  <button class="nav-item" data-page="squad"><span>▦</span> Plantel</button>
+  <button class="nav-item" data-page="tactics"><span>⌘</span> Tácticas</button>
+  <div class="nav-label extra">A TUA CARREIRA</div>
+  <button class="nav-item" data-page="career"><span>♛</span> Carreira <em>BREVEMENTE</em></button>
+  <button class="nav-item" data-page="achievements"><span>✧</span> Conquistas <em>BREVEMENTE</em></button>
+  <div class="sidebar-bottom"><div class="profile"><div class="avatar">7</div><div><b>JOGADOR</b><small>AMADOR · NÍVEL 1</small></div><span>⚙</span></div><small class="version">TGEI FIFIA · BUILD 3D</small></div>
+</aside>
+<main class="main">
+<header class="topbar"><div class="crumb"><span>ESTÁDIO</span><b>/</b><strong id="pageCrumb">INÍCIO</strong></div><div class="top-actions"><span class="online-dot"></span><small>SINGLEPLAYER</small><div class="top-avatar">7</div></div></header>
+<section class="page active" id="page-home">
+  <div class="welcome"><div><p class="kicker">A NOVA ERA DO FUTEBOL COMEÇA AQUI</p><h1>O JOGO É <i>TEU.</i></h1><p>Cria a tua equipa. Entra em campo. Faz história.</p><button class="lime-btn" data-goto="play">JOGAR AGORA <span>↗</span></button></div><div class="welcome-art"><div class="orbit orbit-one"></div><div class="orbit orbit-two"></div><div class="big-ball">⚽</div><div class="art-tag">MATCH<br>DAY <b>01</b></div></div><div class="hero-foot"><span>01 — ESCOLHE O TEU CLUBE</span><span>02 — DEFINE A TUA ESTRATÉGIA</span><span>03 — DOMINA O CAMPO</span></div></div>
+  <div class="section-head"><div><p class="kicker">ENTRA EM CAMPO</p><h2>MODOS DE JOGO</h2></div><span class="section-note">ESCOLHE COMO QUERES JOGAR</span></div>
+  <div class="mode-grid">
+    <button class="mode-card featured" data-goto="play"><div class="mode-art match-art"><span>90'</span><b>VS</b><i>⚽</i></div><div class="mode-copy"><small>01 / COMPETIÇÃO</small><h3>JOGO RÁPIDO</h3><p>Escolhe dois clubes e disputa a vitória.</p><strong>JOGAR AGORA ↗</strong></div></button>
+    <button class="mode-card" data-goto="play"><div class="mode-art training-art"><span>TRAINING</span><i>◉</i></div><div class="mode-copy"><small>02 / TREINO</small><h3>CAMPO DE TREINO</h3><p>Pratica passes, remates e controlo de bola.</p><strong>ENTRAR ↗</strong></div></button>
+    <button class="mode-card" data-goto="play"><div class="mode-art penalty-art"><span>1 VS 1</span><i>◎</i></div><div class="mode-copy"><small>03 / PRECISÃO</small><h3>GRANDES PENÁLTIS</h3><p>Decide tudo na marca dos onze metros.</p><strong>ENTRAR ↗</strong></div></button>
+  </div>
+  <div class="bottom-panels"><div class="info-panel"><p class="kicker">A TUA IDENTIDADE</p><h3>O teu clube. As tuas cores.</h3><p>Representa um dos grandes clubes portugueses e leva as tuas cores até à vitória.</p><button class="text-btn" data-goto="clubs">VER CLUBES ↗</button></div><div class="info-panel stats-panel"><p class="kicker">CENTRO DE JOGO</p><div class="stat"><b>11<span>V</span>11</b><small>JOGADORES EM CAMPO</small></div><div class="stat"><b>3D</b><small>ESTÁDIO EM TEMPO REAL</small></div></div></div>
 </section>
-<section class="scoreboard panel"><div class="club"><b id="homeBadge">SLB</b><span id="homeLabel">BENFICA</span></div><div class="score"><strong id="homeScore">0</strong><span>:</span><strong id="awayScore">0</strong><small id="clock">00:00</small></div><div class="club away"><b id="awayBadge">FCP</b><span id="awayLabel">FC PORTO</span></div></section>
-<section class="game-layout">
-<div class="viewport panel"><div class="hud"><span><i></i> AO VIVO</span><b id="hudMode">JOGO COMPLETO · 11V11</b><span id="possession">TGEI FIFIA</span></div><div id="game"></div><div class="bottom-hint" id="hint">WASD mover · E passar · Q desarmar · Rato apontar · Clique rematar</div><div class="overlay" id="overlay"><div><small>TGEI FIFIA PRESENTS</small><h2>READY FOR<br><em>KICK-OFF?</em></h2><button id="overlayStart" class="primary">ENTRAR EM CAMPO</button></div></div></div>
-<aside class="side panel"><small class="eyebrow">PLAYER HUB</small><h2>Controlos</h2><div class="control"><kbd>W A S D</kbd><span>Movimentar jogador</span></div><div class="control"><kbd>E</kbd><span>Passar ao melhor colega</span></div><div class="control"><kbd>Q</kbd><span>Desarme / pressão</span></div><div class="control"><kbd>CLICK</kbd><span>Rematar na direção do rato</span></div><div class="control"><kbd>SHIFT</kbd><span>Sprint</span></div><div class="meter-label"><span>ENERGIA</span><b id="stamina">100%</b></div><div class="meter"><i id="staminaBar"></i></div><div class="player-card"><small>JOGADOR CONTROLADO</small><strong id="playerName">N.º 7 · EXTREMO</strong><span id="playerState">Pronto para jogar</span></div><button id="reset" class="secondary">REINICIAR PARTIDA</button></aside>
+<section class="page" id="page-play">
+  <div class="page-title"><p class="kicker">PREPARA-TE PARA O APITO INICIAL</p><h1>CONFIGURA O <i>JOGO.</i></h1><p>Escolhe os clubes, ajusta a dificuldade e entra em campo.</p></div>
+  <div class="match-config">
+    <div class="team-pick"><label>O TEU CLUBE</label><div class="team-crest home-crest" id="homeBadge">SLB</div><select id="homeTeam"><option>Benfica</option><option>FC Porto</option><option>Sporting</option><option>SC Braga</option><option>Vitória SC</option><option>Boavista</option><option>Rio Ave</option></select><small id="homeLabel">BENFICA</small></div>
+    <div class="versus"><span>VS</span><small>JOGO RÁPIDO</small></div>
+    <div class="team-pick"><label>ADVERSÁRIO</label><div class="team-crest away-crest" id="awayBadge">FCP</div><select id="awayTeam"><option>FC Porto</option><option>Benfica</option><option>Sporting</option><option>SC Braga</option><option>Vitória SC</option><option>Boavista</option><option>Rio Ave</option></select><small id="awayLabel">FC PORTO</small></div>
+  </div>
+  <div class="settings-row"><label>FORMAÇÃO<select id="formation"><option>4-3-3</option><option>4-4-2</option><option>4-2-2-2</option><option>3-5-2</option></select></label><label>DIFICULDADE<select id="difficulty"><option value="0.8">Amador</option><option value="1" selected>Profissional</option><option value="1.25">Lendário</option></select></label><label>DURAÇÃO<select id="duration"><option>90 minutos</option><option>6 minutos</option><option>10 minutos</option></select></label></div>
+  <div class="match-actions"><button id="start" class="lime-btn">COMEÇAR PARTIDA <span>↗</span></button><span>11 CONTRA 11 <b>·</b> ESTÁDIO 3D <b>·</b> SINGLEPLAYER</span></div>
 </section>
-<section class="footer-grid"><div class="panel"><small class="eyebrow">MATCH CENTER</small><h3>Objetivo: dominar o relvado.</h3><p>Constrói jogadas, ocupa os espaços e procura a baliza. Os colegas mantêm as posições e os adversários pressionam a bola.</p></div><div class="panel"><small class="eyebrow">ENGINE</small><h3>3D em tempo real</h3><p>Three.js para renderização 3D e Rapier para simulação física e colisões da bola.</p></div></section>
-<footer>TGEI FIFIA · EXPERIÊNCIA DE FUTEBOL 3D · FEITO PARA JOGAR</footer>
+<section class="page" id="page-clubs"><div class="page-title"><p class="kicker">REPRESENTA AS TUAS CORES</p><h1>ESCOLHE O TEU <i>CLUBE.</i></h1><p>Os grandes emblemas do futebol português.</p></div><div class="club-grid">
+<button class="club-tile" data-club="Benfica"><b class="crest red">SLB</b><strong>BENFICA</strong><small>ÁGUIAS · LISBOA</small></button>
+<button class="club-tile" data-club="FC Porto"><b class="crest blue">FCP</b><strong>FC PORTO</strong><small>DRAGÕES · PORTO</small></button>
+<button class="club-tile" data-club="Sporting"><b class="crest green">SCP</b><strong>SPORTING</strong><small>LEÕES · LISBOA</small></button>
+<button class="club-tile" data-club="SC Braga"><b class="crest red">SCB</b><strong>SC BRAGA</strong><small>GUERREIROS · BRAGA</small></button>
+<button class="club-tile" data-club="Vitória SC"><b class="crest black">VSC</b><strong>VITÓRIA SC</strong><small>CONQUISTADORES · GUIMARÃES</small></button>
+<button class="club-tile" data-club="Boavista"><b class="crest black">BFC</b><strong>BOAVISTA</strong><small>PANTERAS · PORTO</small></button>
+<button class="club-tile" data-club="Rio Ave"><b class="crest teal">RAV</b><strong>RIO AVE</strong><small>VILA DO CONDE</small></button>
+</div></section>
+<section class="page" id="page-squad"><div class="page-title"><p class="kicker">GESTÃO DE EQUIPA</p><h1>O TEU <i>PLANTEL.</i></h1><p>Prepara os onze que vão lutar pela vitória.</p></div><div class="squad-layout"><div class="pitch-board"><div class="pitch-lines"></div><span class="formation-label">4 — 3 — 3</span><div class="shirt-row"><b>11</b><b>9</b><b>7</b></div><div class="shirt-row mids"><b>8</b><b>6</b><b>10</b></div><div class="shirt-row defs"><b>3</b><b>4</b><b>5</b><b>2</b></div><div class="shirt-row keeper"><b>1</b></div></div><div class="squad-info"><p class="kicker">ONZE INICIAL</p><h2>FORMAÇÃO 4-3-3</h2><p>O teu onze está pronto para entrar em campo. A gestão detalhada de posições e suplentes será ligada à simulação nas próximas actualizações.</p><button class="lime-btn" data-goto="play">PREPARAR PARTIDA ↗</button></div></div></section>
+<section class="page" id="page-tactics"><div class="page-title"><p class="kicker">CONTROLA O RITMO</p><h1>DEFINE A <i>ESTRATÉGIA.</i></h1><p>Escolhe a formação antes de entrares em campo.</p></div><div class="tactic-grid"><button class="tactic-card selected" data-formation="4-3-3"><b>4-3-3</b><span>ATAQUE EQUILIBRADO</span><small>Amplitude e pressão alta</small></button><button class="tactic-card" data-formation="4-4-2"><b>4-4-2</b><span>EQUILÍBRIO</span><small>Duas linhas compactas</small></button><button class="tactic-card" data-formation="4-2-2-2"><b>4-2-2-2</b><span>CONTROLO CENTRAL</span><small>Domínio do meio-campo</small></button><button class="tactic-card" data-formation="3-5-2"><b>3-5-2</b><span>PRESSÃO E LARGURA</span><small>Superioridade no meio</small></button></div></section>
+<section class="page" id="page-career"><div class="coming"><span>♛</span><p class="kicker">EM DESENVOLVIMENTO</p><h1>CARREIRA <i>PRO.</i></h1><p>Constrói um clube, gere o plantel e conquista títulos.</p></div></section>
+<section class="page" id="page-achievements"><div class="coming"><span>✧</span><p class="kicker">EM DESENVOLVIMENTO</p><h1>AS TUAS <i>CONQUISTAS.</i></h1><p>Os teus feitos vão ficar registados aqui.</p></div></section>
+<section class="page" id="page-match">
+  <div class="match-top"><button id="backMenu" class="back-btn">← MENU PRINCIPAL</button><div class="match-score"><span id="homeLabelMatch">BENFICA</span><b id="homeScore">0</b><i>:</i><b id="awayScore">0</b><span id="awayLabelMatch">FC PORTO</span><small id="clock">00:00</small></div><span class="match-live"><i></i> AO VIVO</span></div>
+  <div class="game-layout"><div class="viewport"><div class="hud"><span><i></i> LIVE MATCH</span><b id="hudMode">JOGO COMPLETO · 11V11</b><span id="possession">TGEI FIFIA</span></div><div id="game"></div><div class="bottom-hint" id="hint">WASD mover · E passar · Q desarmar · Rato apontar · Clique rematar</div><div class="overlay" id="overlay"><div><small>TGEI FIFIA PRESENTS</small><h2>READY FOR<br><em>KICK-OFF?</em></h2><button id="overlayStart" class="lime-btn">ENTRAR EM CAMPO</button></div></div></div>
+  <aside class="match-side"><p class="kicker">PLAYER HUB</p><h2>EM CAMPO</h2><div class="control"><kbd>W A S D</kbd><span>Movimentar</span></div><div class="control"><kbd>E</kbd><span>Passar</span></div><div class="control"><kbd>Q</kbd><span>Desarmar</span></div><div class="control"><kbd>CLICK</kbd><span>Rematar</span></div><div class="control"><kbd>SHIFT</kbd><span>Sprint</span></div><div class="meter-label"><span>ENERGIA</span><b id="stamina">100%</b></div><div class="meter"><i id="staminaBar"></i></div><div class="player-card"><small>JOGADOR CONTROLADO</small><strong id="playerName">N.º 7 · EXTREMO</strong><span id="playerState">Pronto para jogar</span></div><button id="reset" class="exit-btn">TERMINAR PARTIDA</button></aside></div>
+</section>
+<footer class="global-footer"><span>TGEI FIFIA © 2026</span><span>FEITO PARA QUEM VIVE O FUTEBOL.</span><span>BUILD 3D · SINGLEPLAYER</span></footer>
+</main>
 </div>
 <script type="module" src="script.js"></script>
 </body></html>
